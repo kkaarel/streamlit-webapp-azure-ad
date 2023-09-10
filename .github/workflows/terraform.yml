@@ -3,7 +3,7 @@ name: 'Terraform'
 on:
   push:
     branches:
-    - main
+    - dev
   pull_request:
  
 jobs:
@@ -16,7 +16,7 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
     runs-on: ubuntu-latest
-    environment: production
+
  
     defaults:
       run:
