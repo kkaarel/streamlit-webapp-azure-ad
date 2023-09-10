@@ -1,14 +1,11 @@
-variable "RESOURCE_GROUP_NAME" {
-}
+variable "RESOURCE_GROUP_NAME" {}
 
 variable "project" {
   type    = string
   default = "streamlit-ad"
 }
 
-variable "ARM_TENANT_ID" {
-
-}
+variable "ARM_TENANT_ID" {}
 
 variable "location" {
   type        = string
@@ -16,6 +13,4 @@ variable "location" {
   default     = "West Europe"
 }
 
-variable "storage_account_name" {
-  
-}
+variable "storage_account_name" {}
