@@ -1,6 +1,6 @@
 provider "azurerm" {
   skip_provider_registration = true
-  version = "~>2.0"
+  version = "~>0.13"
   features {}
   use_oidc = true
 }
