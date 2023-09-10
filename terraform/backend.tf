@@ -1,8 +1,8 @@
 terraform {
-backend "azurerm" {
-  container_name       = "tfstatestreamlitappad"
-  key                  = "terraform.tfstate"
-  storage_account_name = "kkkaarel"
-
+  backend "azurerm" {
+    resource_group_name   = var.resource_group_name
+    storage_account_name  = var.storage_account_name
+    container_name        = var.container_name
+    key                   = var.storage_blob_name
   }
 }

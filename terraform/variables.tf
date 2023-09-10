@@ -19,3 +19,9 @@ variable "location" {
   description = "Default location of West Europe"
   default     = "West Europe"
 }
+
+
+variable "storage_account_name" {}
+variable "container_name" {}
+variable "storage_blob_name" {}
+
