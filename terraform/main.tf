@@ -34,9 +34,9 @@ resource "azurerm_service_plan" "streamlit" {
 
   lifecycle {
     create_before_destroy = true
-    ignore_changes = [ 
+    ignore_changes = [
       tags
-     ]
+    ]
   }
 
 }
@@ -44,11 +44,11 @@ resource "azurerm_service_plan" "streamlit" {
 
 
 resource "azurerm_linux_web_app" "app" {
-  name                = "WEBAPP-${var.project}-${terraform.workspace}"          
+  name                = "WEBAPP-${var.project}-${terraform.workspace}"
   location            = var.location
-  service_plan_id     = azurerm_service_plan.streamlit.id       
+  service_plan_id     = azurerm_service_plan.streamlit.id
   resource_group_name = data.azurerm_resource_group.main.name
-  https_only = true
+  https_only          = true
 
   identity {
     type = "SystemAssigned"
@@ -56,23 +56,23 @@ resource "azurerm_linux_web_app" "app" {
 
 
   auth_settings_v2 {
-      auth_enabled             = true
-      require_authentication   = true
-      default_provider         = "azureactivedirectory"
-      unauthenticated_action   = "RedirectToLoginPage"
+    auth_enabled           = true
+    require_authentication = true
+    default_provider       = "azureactivedirectory"
+    unauthenticated_action = "RedirectToLoginPage"
 
-      active_directory_v2 {
-        // The application is pre created from Azure, this is for security puropses so that the deployment script would only have rights to create resources.
-          client_id                       = "---"
-          client_secret_setting_name      = "MICROSOFT_PROVIDER_AUTHENTICATION_SECRET"
-          tenant_auth_endpoint            = "https://sts.windows.net/${var.ARM_TENANT_ID}/v2.0"
-          www_authentication_disabled     = false
-      }
+    active_directory_v2 {
+      // The application is pre created from Azure, this is for security puropses so that the deployment script would only have rights to create resources.
+      client_id                   = "---"
+      client_secret_setting_name  = "MICROSOFT_PROVIDER_AUTHENTICATION_SECRET"
+      tenant_auth_endpoint        = "https://sts.windows.net/${var.ARM_TENANT_ID}/v2.0"
+      www_authentication_disabled = false
+    }
 
-      login {
-          token_store_enabled               = true
+    login {
+      token_store_enabled = true
 
-      }
+    }
   }
 
   site_config {
@@ -82,7 +82,7 @@ resource "azurerm_linux_web_app" "app" {
 
     application_stack {
       python_version = "3.10"
-    }    
+    }
   }
 
   app_settings = {
@@ -93,10 +93,10 @@ resource "azurerm_linux_web_app" "app" {
 
 #  Deploy code from a public GitHub repo
 resource "azurerm_app_service_source_control" "sourcecontrol" {
-  app_id             = azurerm_linux_web_app.app.id
+  app_id = azurerm_linux_web_app.app.id
   // There is a folder directed, not the whole branch
-  repo_url           = "https://github.com/kkaarel/streamlit-webapp-azure-ad/tree/dev/streamlit"
-  branch             = "dev"
+  repo_url               = "https://github.com/kkaarel/streamlit-webapp-azure-ad/tree/dev/streamlit"
+  branch                 = "dev"
   use_manual_integration = true
-  use_mercurial      = false
+  use_mercurial          = false
 }
