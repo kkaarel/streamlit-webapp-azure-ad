@@ -6,9 +6,26 @@ data "azurerm_client_config" "current" {
 
 }
 
+output "account_id" {
+  value = data.azurerm_client_config.current.client_id
+}
+
 data "azurerm_resource_group" "main" {
   name = var.resource_group_name
 }
+
+
+
+resource "azurerm_storage_account" "tfstate" {
+  name                     = "kkkaarel"
+  resource_group_name      = azurerm_resource_group.main.name
+  location                 = azurerm_resource_group.main.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+}
+
+
 
 
 resource "azurerm_service_plan" "streamlit" {
