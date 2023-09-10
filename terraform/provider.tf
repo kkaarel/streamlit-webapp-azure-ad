@@ -1,8 +1,7 @@
 provider "azurerm" {
   skip_provider_registration = true
+  version = "~>1.0"
   features {}
-  subscription_id   = ""
-  tenant_id         = ""
-  client_id         = ""
-  client_secret     = ""
 }
+
+
