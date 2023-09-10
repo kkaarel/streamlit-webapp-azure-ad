@@ -1,4 +1,4 @@
-variable "resource_group_name" {
+variable "RESOURCE_GROUP_NAME" {
     type = string
     default = ""
 }
@@ -21,7 +21,7 @@ variable "location" {
 }
 
 
-variable "storage_account_name" {}
-variable "container_name" {}
-variable "storage_blob_name" {}
+variable "STORAGE_ACCOUNT_NAME" {}
+variable "CONTAINER_NAME" {}
+variable "STORAGE_BLOB_NAME" {}
 
