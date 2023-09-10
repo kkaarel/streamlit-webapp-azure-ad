@@ -38,8 +38,9 @@ jobs:
           export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
           export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
           export ARM_TENANT_ID=$ARM_TENANT_ID
+          export STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME
 
-          terraform plan -input=false -var rg_name=$RG_NAME
+          terraform plan -input=false -var rg_name=$RESOURCE_GROUP_NAME
         env:
           ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
           ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
@@ -54,11 +55,13 @@ jobs:
           export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
           export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
           export ARM_TENANT_ID=$ARM_TENANT_ID
+          export STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME
 
-          terraform apply -auto-approve -input=false -var rg_name=$RG_NAME
+          terraform apply -auto-approve -input=false -var rg_name=$RESOURCE_GROUP_NAME
         env:
           ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
           ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
           ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
           ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
-          RG_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
+          RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
+          STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME}}
