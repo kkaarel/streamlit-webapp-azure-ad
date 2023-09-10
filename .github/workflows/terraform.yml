@@ -18,7 +18,7 @@ jobs:
       STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME }}
       CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
       STORAGE_BLOB_NAME: ${{ secrets.STORAGE_BLOB_NAME }}
-
+      KEY: ${{ secrets.KEY }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
