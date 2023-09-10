@@ -27,6 +27,12 @@ env:
   TF_VAR_resource_group_name: "${{ secrets.resource_group_name }}"
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Terraform directory
+        run: |
+          ls -al terraform
   terraform-plan:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
