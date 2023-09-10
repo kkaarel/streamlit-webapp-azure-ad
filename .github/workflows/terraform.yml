@@ -30,10 +30,10 @@ jobs:
 
     - name: Initialize Terraform
       working-directory: ./terraform
-      run: |
-        terraform init
+      run: terraform init
 
     - name: Terraform Plan
+      id: tf-plan  
       working-directory: ./terraform
       run: terraform plan -out=tfplan.out
 
