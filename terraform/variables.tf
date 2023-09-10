@@ -1,6 +1,4 @@
 variable "RESOURCE_GROUP_NAME" {
-  type    = string
-  default = ""
 }
 
 variable "project" {
@@ -9,8 +7,6 @@ variable "project" {
 }
 
 variable "ARM_TENANT_ID" {
-  type    = string
-  default = ""
 
 }
 
@@ -20,3 +16,6 @@ variable "location" {
   default     = "West Europe"
 }
 
+variable "storage_account_bame" {
+  
+}
