@@ -40,7 +40,7 @@ jobs:
           export ARM_TENANT_ID=$ARM_TENANT_ID
           export STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME
 
-          terraform plan -input=false -var rg_name=$RESOURCE_GROUP_NAME
+          terraform plan -input=false -var RESOURCE_GROUP_NAME=$RESOURCE_GROUP_NAME
         env:
           ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
           ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
@@ -57,7 +57,7 @@ jobs:
           export ARM_TENANT_ID=$ARM_TENANT_ID
           export STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME
 
-          terraform apply -auto-approve -input=false -var rg_name=$RESOURCE_GROUP_NAME
+          terraform apply -auto-approve -input=false -var RESOURCE_GROUP_NAME=$RESOURCE_GROUP_NAME
         env:
           ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
           ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
