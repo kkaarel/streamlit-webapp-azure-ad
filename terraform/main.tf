@@ -6,9 +6,6 @@ data "azurerm_client_config" "current" {
 
 }
 
-output "account_id" {
-  value = data.azurerm_client_config.current.client_id
-}
 
 data "azurerm_resource_group" "main" {
   name = var.resource_group_name
