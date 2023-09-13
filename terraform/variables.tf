@@ -14,3 +14,7 @@ variable "location" {
 }
 
 variable "STORAGE_ACCOUNT_NAME" {}
+
+variable "AZUREGITHUBTOKEN" {
+  
+}
