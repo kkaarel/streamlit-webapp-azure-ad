@@ -6,6 +6,10 @@ data "azurerm_client_config" "current" {
 
 }
 
+output "ARM_TENANT_ID" {
+  value = data.azurerm_client_config.current.tenant_id
+}
+
 
 data "azurerm_resource_group" "main" {
   name = "kkaarel_dev001"
