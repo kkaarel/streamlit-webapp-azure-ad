@@ -24,22 +24,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-
-      - name: Azure CLI script
-        uses: azure/CLI@v1
-        with:
-          azcliversion: 2.30.0  
-          inlineScript: |
-              az login \
-              --service-principal \
-              -u ${{secrets.AZURE_CLIENT_ID}} \
-              --tenant  ${{secrets.ARM_TENANT_ID}} \
-              -p $${{secrets.ARM_CLIENT_SECRET}}
-
-              az account set \
-                --subscription ${{secrets.ARM_SUBSCRIPTION_ID}}
-
+          
       - uses: actions/checkout@v2
 
       - name: Setup Terraform
