@@ -12,7 +12,7 @@ output "ARM_TENANT_ID" {
 
 
 data "azurerm_resource_group" "main" {
-  name = "kkaarel_dev001"
+  name = var.RESOURCE_GROUP_NAME
 
 }
 
@@ -100,8 +100,8 @@ resource "azurerm_linux_web_app" "app" {
 resource "azurerm_app_service_source_control" "sourcecontrol" {
   app_id = azurerm_linux_web_app.app.id
   // There is a folder directed, not the whole branch
-  repo_url               = "https://github.com/kkaarel/streamlit-webapp-azure-ad/tree/dev/streamlit"
-  branch                 = "dev"
+  //repo_url               = "https://github.com/kkaarel/streamlit-webapp-azure-ad/tree/dev/streamlit"
+  //branch                 = "dev"
   use_manual_integration = true
   use_mercurial          = false
 }
