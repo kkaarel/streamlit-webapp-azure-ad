@@ -105,6 +105,4 @@ resource "azurerm_app_service_source_control" "sourcecontrol" {
   }
   repo_url               = "https://github.com/kkaarel/streamlit-webapp-azure-ad/tree/dev/streamlit"
   branch                 = "dev"
-  use_manual_integration = true
-  use_mercurial          = false
 }
