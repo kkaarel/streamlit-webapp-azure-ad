@@ -97,12 +97,12 @@ resource "azurerm_linux_web_app" "app" {
 }
 
 #  Deploy code from a public GitHub repo
-resource "azurerm_app_service_source_control" "sourcecontrol" {
-  app_id = azurerm_linux_web_app.app.id
+#resource "azurerm_app_service_source_control" "sourcecontrol" {
+#  app_id = azurerm_linux_web_app.app.id
   // There is a folder directed, not the whole branch
-  github_action_configuration {
-    generate_workflow_file = true
-  }
-  repo_url               = "https://github.com/kkaarel/streamlit-webapp-azure-ad/tree/dev/streamlit"
-  branch                 = "dev"
-}
+#  github_action_configuration {
+#   generate_workflow_file = true
+#  }
+#  repo_url               = "https://github.com/kkaarel/streamlit-webapp-azure-ad/tree/dev/streamlit"
+#  branch                 = "dev"
+#}
