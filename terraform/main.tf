@@ -49,7 +49,7 @@ resource "azurerm_service_plan" "streamlit" {
 
 
 resource "azurerm_linux_web_app" "app" {
-  name                = "WEBAPP-${var.project}-"
+  name                = "WEBAPP-${var.project}"
   location            = var.location
   service_plan_id     = azurerm_service_plan.streamlit.id
   resource_group_name = data.azurerm_resource_group.main.name
