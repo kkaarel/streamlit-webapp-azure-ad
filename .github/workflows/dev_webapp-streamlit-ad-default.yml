@@ -52,7 +52,7 @@ jobs:
         with:
           name: python-app
           path: |
-            . 
+            ./streamlit 
             !venv/
   deploy:
     runs-on: ubuntu-latest
