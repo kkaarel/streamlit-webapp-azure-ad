@@ -55,9 +55,9 @@ jobs:
           export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
           export ARM_TENANT_ID=$ARM_TENANT_ID
           export STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME
-          export AZUREGITHUBTOKEN=$AZUREGITHUBTOKEN
 
-          terraform plan  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=SourceControlToken=${{ secrets.AZUREGITHUBTOKEN }}    -no-color -input=false
+
+          terraform plan  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }}    -no-color -input=false
 
         env:
           ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
@@ -75,4 +75,4 @@ jobs:
           export ARM_TENANT_ID=$ARM_TENANT_ID
           export STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME
 
-          terraform apply -auto-approve -input=false  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=SourceControlToken=${{ secrets.AZUREGITHUBTOKEN }}
+          terraform apply -auto-approve -input=false  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} 
