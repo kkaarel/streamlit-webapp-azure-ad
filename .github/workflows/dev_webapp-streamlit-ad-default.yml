@@ -63,6 +63,11 @@ jobs:
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
+        with:
+          name: python-app
+          path: |
+            . 
+            !venv/
 
           
       - name: 'Deploy to Azure Web App'
