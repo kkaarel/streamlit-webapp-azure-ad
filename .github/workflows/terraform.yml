@@ -6,7 +6,7 @@ on:
     - dev
     paths:
       - 'terraform/**'
-      - '.github/**'
+      - '.github/workflows/terraform**'
 
 
 jobs:
