@@ -19,6 +19,7 @@ jobs:
       TF_VAR_STORAGE_BLOB_NAME: ${{ secrets.STORAGE_BLOB_NAME }}
       TF_VAR_STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME}}
       TF_VAR_AZUREGITHUBTOKEN: ${{ secrets.AZUREGITHUBTOKEN}}
+      CLIENT_ID_AD: ${{ secrets.CLIENT_ID_AD }}
       TF_VERSION: latest
 
     steps:
@@ -39,6 +40,7 @@ jobs:
           export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
           export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
           export ARM_TENANT_ID=$ARM_TENANT_ID
+          export: CLIENT_ID_AD=$CLIENT_ID_AD
 
           terraform init -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }}
         env:
@@ -55,6 +57,7 @@ jobs:
           export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
           export ARM_TENANT_ID=$ARM_TENANT_ID
           export STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME
+          export: CLIENT_ID_AD=$CLIENT_ID_AD
 
 
           terraform plan  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }}  -var=CLIENT_ID_AD=${{ secrets.CLIENT_ID_AD }}   -no-color -input=false
@@ -74,5 +77,6 @@ jobs:
           export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
           export ARM_TENANT_ID=$ARM_TENANT_ID
           export STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME
+          export: CLIENT_ID_AD=$CLIENT_ID_AD
 
           terraform apply -auto-approve -input=false  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=CLIENT_ID_AD=${{ secrets.CLIENT_ID_AD }}
