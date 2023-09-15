@@ -1,11 +1,17 @@
-variable "RESOURCE_GROUP_NAME" {}
+variable "RESOURCE_GROUP_NAME" {
+    type = string
+    default = ""
+}
 
 variable "project" {
   type    = string
   default = "streamlit-adintegration"
 }
 
-variable "ARM_TENANT_ID" {}
+variable "ARM_TENANT_ID" {
+    type = string
+    default = ""
+}
 
 variable "location" {
   type        = string
@@ -13,9 +19,21 @@ variable "location" {
   default     = "West Europe"
 }
 
-variable "STORAGE_ACCOUNT_NAME" {}
+variable "STORAGE_ACCOUNT_NAME" {
+    type = string
+    default = ""
+}
 
 variable "client_id_ad" {
+    type = string
+    default = ""
+  
+}
+
+
+variable "archive_file_streamlit" {
+  type = string
+  default = "./streamlit/streamlit.zip"
   
 }
 

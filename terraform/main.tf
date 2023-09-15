@@ -6,15 +6,19 @@ data "azurerm_client_config" "current" {
 
 }
 
-output "ARM_TENANT_ID" {
-  value = data.azurerm_client_config.current.tenant_id
-}
-
 
 data "azurerm_resource_group" "main" {
   name = var.RESOURCE_GROUP_NAME
 
 }
+
+data "archive_file" "app" {
+  type        = "zip"
+  source_dir  = "./streamlit"
+  output_path = var.archive_file_streamlit
+}
+
+
 
 
 
@@ -96,3 +100,20 @@ resource "azurerm_linux_web_app" "app" {
   }
 }
 
+locals {
+    publish_code_command_linux = "az webapp deployment source config-zip --resource-group ${azurerm_linux_web_app.app.resource_group_name} --name ${azurerm_linux_web_app.app.name} --src ${var.archive_file_streamlit}"
+   
+    }
+                                  
+
+
+resource "null_resource" "app" {
+  provisioner "local-exec" {
+    command = local.publish_code_command_linux
+  }
+  depends_on = [local.publish_code_command_linux]
+  triggers = {
+    input_json = filemd5(var.archive_file_streamlit)
+    publish_code_command = local.publish_code_command_linux
+  }
+}
