@@ -44,7 +44,7 @@ jobs:
           warehouse = $(echo -e \"${{ secrets.SNOWFLAKE_WAREHOUSE_DEV }}\")
           database = $(echo -e \"${{ secrets.SNOWFLAKE_DATABASE_DEV }}\")
           schema = $(echo -e \"${{ secrets.SNOWFLAKE_SCHEMA_DEV }}\")
-          client_session_keep_alive = true" >> .streamlit/secrets.toml
+          client_session_keep_alive = true" >> streamlit/.streamlit/secrets.toml
       
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
