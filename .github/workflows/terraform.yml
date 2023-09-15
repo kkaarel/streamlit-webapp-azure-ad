@@ -34,44 +34,15 @@ jobs:
       - name: Terraform Init
         working-directory: ./terraform
         run: |
-          export ARM_CLIENT_ID=$ARM_CLIENT_ID
-          export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
-          export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
-          export ARM_TENANT_ID=$ARM_TENANT_ID
-
           terraform init -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }}
-        env:
-          ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
-          ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
-          ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
-          ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
 
       - name: Terraform Plan
         working-directory: ./terraform  
         run: |
-          export ARM_CLIENT_ID=$ARM_CLIENT_ID
-          export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
-          export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
-          export ARM_TENANT_ID=$ARM_TENANT_ID
-          export STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME
-          export AZUREGITHUBTOKEN=$AZUREGITHUBTOKEN
 
           terraform plan  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=SourceControlToken=${{ secrets.AZUREGITHUBTOKEN }}    -no-color -input=false
-
-        env:
-          ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
-          ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
-          ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
-          ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
-          RG_NAME: "tamopsrggithub"
-          
+         
       - name: Terraform Apply
         working-directory: ./terraform
         run: |
-          export ARM_CLIENT_ID=$ARM_CLIENT_ID
-          export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
-          export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
-          export ARM_TENANT_ID=$ARM_TENANT_ID
-          export STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME
-
           terraform apply -auto-approve -input=false  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=SourceControlToken=${{ secrets.AZUREGITHUBTOKEN }}
