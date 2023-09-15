@@ -21,12 +21,20 @@ jobs:
       TF_VERSION: latest
 
     steps:
-      - name: Azure login
+      - name: Az CLI login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - run: |
-            az webapp list --query "[?state=='Running']"
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az account show
+            az group list
 
       - uses: actions/checkout@v2
 
