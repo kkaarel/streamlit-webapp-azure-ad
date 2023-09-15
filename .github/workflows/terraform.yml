@@ -51,7 +51,7 @@ jobs:
           export ARM_TENANT_ID=$ARM_TENANT_ID
           export: CLIENT_ID_AD=$CLIENT_ID_AD
 
-          terraform init  -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} 
+          terraform init  -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }}  var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }}  -var=CLIENT_ID_AD=${{ secrets.CLIENT_ID_AD }} 
         env:
           ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
           ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
