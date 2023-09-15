@@ -68,7 +68,7 @@ resource "azurerm_linux_web_app" "app" {
 
     active_directory_v2 {
       // The application is pre created from Azure, this is for security puropses so that the deployment script would only have rights to create resources.
-      client_id                   = "---"
+      client_id                   = var.client_id_ad
       client_secret_setting_name  = "MICROSOFT_PROVIDER_AUTHENTICATION_SECRET"
       tenant_auth_endpoint        = "https://sts.windows.net/${var.ARM_TENANT_ID}/v2.0"
       www_authentication_disabled = false
@@ -81,7 +81,7 @@ resource "azurerm_linux_web_app" "app" {
   }
 
   site_config {
-    app_command_line = "python -m streamlit run app.py  --server.port 8000 --server.address 0.0.0.0"
+    app_command_line = "python -m streamlit run streamlit/app.py  --server.port 8000 --server.address 0.0.0.0"
 
 
 
@@ -96,13 +96,3 @@ resource "azurerm_linux_web_app" "app" {
   }
 }
 
-#  Deploy code from a public GitHub repo
-#resource "azurerm_app_service_source_control" "sourcecontrol" {
-#  app_id = azurerm_linux_web_app.app.id
-  // There is a folder directed, not the whole branch
-#  github_action_configuration {
-#   generate_workflow_file = true
-#  }
-#  repo_url               = "https://github.com/kkaarel/streamlit-webapp-azure-ad/tree/dev/streamlit"
-#  branch                 = "dev"
-#}

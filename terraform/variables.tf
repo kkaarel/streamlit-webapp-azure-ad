@@ -15,6 +15,7 @@ variable "location" {
 
 variable "STORAGE_ACCOUNT_NAME" {}
 
-variable "SourceControlToken" {
+variable "client_id_ad" {
   
 }
+

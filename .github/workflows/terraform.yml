@@ -6,6 +6,7 @@ on:
     - dev
     paths:
       - terraform
+      - '.github/**'
 
 
 jobs:
@@ -20,6 +21,7 @@ jobs:
       TF_VAR_STORAGE_BLOB_NAME: ${{ secrets.STORAGE_BLOB_NAME }}
       TF_VAR_STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME}}
       TF_VAR_AZUREGITHUBTOKEN: ${{ secrets.AZUREGITHUBTOKEN}}
+      CLIENT_ID_AD: ${{ secrets.CLIENT_ID_AD}}
       TF_VERSION: latest
 
     steps:
@@ -42,9 +44,9 @@ jobs:
         working-directory: ./terraform  
         run: |
 
-          terraform plan  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=SourceControlToken=${{ secrets.AZUREGITHUBTOKEN }}    -no-color -input=false
+          terraform plan  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=SourceControlToken=${{ secrets.AZUREGITHUBTOKEN }}  -var=CLIENT_ID_AD=${{ secrets.CLIENT_ID_AD }}   -no-color -input=false
          
       - name: Terraform Apply
         working-directory: ./terraform
         run: |
-          terraform apply -auto-approve -input=false  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=SourceControlToken=${{ secrets.AZUREGITHUBTOKEN }}
+          terraform apply -auto-approve -input=false  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=CLIENT_ID_AD=${{ secrets.CLIENT_ID_AD }}
