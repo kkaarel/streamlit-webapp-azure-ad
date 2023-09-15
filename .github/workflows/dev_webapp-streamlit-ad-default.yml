@@ -71,6 +71,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'WEBAPP-streamlit-ad-default'
+          app-name: 'WEBAPP-streamlit-adintegration'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_910D0F855D5F45209C55E94FA278FC07 }}
