@@ -48,6 +48,8 @@ jobs:
           ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
           ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
           ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
+          CLIENT_ID_AD: ${{ secrets.CLIENT_ID_AD }}
+          
 
       - name: Terraform Plan
         working-directory: ./terraform  
@@ -67,7 +69,8 @@ jobs:
           ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
           ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
           ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
-          RG_NAME: "tamopsrggithub"
+          CLIENT_ID_AD: ${{ secrets.CLIENT_ID_AD }}
+          
           
       - name: Terraform Apply
         working-directory: ./terraform
