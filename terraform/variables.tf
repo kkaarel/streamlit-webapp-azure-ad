@@ -2,7 +2,7 @@ variable "RESOURCE_GROUP_NAME" {}
 
 variable "project" {
   type    = string
-  default = "streamlit-ad"
+  default = "streamlit-adintegration"
 }
 
 variable "ARM_TENANT_ID" {}

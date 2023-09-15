@@ -49,7 +49,7 @@ resource "azurerm_service_plan" "streamlit" {
 
 
 resource "azurerm_linux_web_app" "app" {
-  name                = "WEBAPP-${var.project}-${terraform.workspace}"
+  name                = "WEBAPP-${var.project}-"
   location            = var.location
   service_plan_id     = azurerm_service_plan.streamlit.id
   resource_group_name = data.azurerm_resource_group.main.name
@@ -81,7 +81,7 @@ resource "azurerm_linux_web_app" "app" {
   }
 
   site_config {
-    app_command_line = "python -m streamlit run streamlit/app.py  --server.port 8000 --server.address 0.0.0.0"
+    app_command_line = "python -m streamlit run app.py  --server.port 8000 --server.address 0.0.0.0"
 
 
 
