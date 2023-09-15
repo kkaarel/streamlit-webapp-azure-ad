@@ -21,7 +21,7 @@ jobs:
       TF_VAR_STORAGE_BLOB_NAME: ${{ secrets.STORAGE_BLOB_NAME }}
       TF_VAR_STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME}}
       TF_VAR_AZUREGITHUBTOKEN: ${{ secrets.AZUREGITHUBTOKEN}}
-      CLIENT_ID_AD: ${{ secrets.CLIENT_ID_AD}}
+
       TF_VERSION: latest
 
     steps:
@@ -39,7 +39,7 @@ jobs:
           TF_VAR_STORAGE_BLOB_NAME: ${{ secrets.STORAGE_BLOB_NAME }}
           TF_VAR_STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME}}
           TF_VAR_AZUREGITHUBTOKEN: ${{ secrets.AZUREGITHUBTOKEN}}
-          CLIENT_ID_AD: ${{ secrets.CLIENT_ID_AD}}
+
 
 
       - uses: actions/checkout@v2
