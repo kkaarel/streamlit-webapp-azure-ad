@@ -12,7 +12,6 @@ st.sidebar.success("Select a demo above.")
 
 
 
-
 headers = _get_websocket_headers()
 
 if "X-Ms-Client-Principal-Name" in headers:
