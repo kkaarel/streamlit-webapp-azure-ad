@@ -106,6 +106,6 @@ resource "null_resource" "app" {
 // Add secrets to .streamlit/secrets.toml
 
 resource "local_file" "secrets" {
-  content  = var.secrets_streamlit
+  content  = var.SECRETS_STREAMLIT
   filename = ".streamlit/secrets.toml"
 }
