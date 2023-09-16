@@ -5,8 +5,9 @@ on:
   push:
     branches:
     - dev
-#    paths:
-#    - terraform/**
+    paths:
+    - '.github/workflows/terraform.yml'  
+    - 'terraform/*'
 #  pull_request:
 #    branches:
 #    - dev
@@ -15,6 +16,7 @@ on:
 
 jobs:
   terraform:
+    name: Deploy to azure
     runs-on: ubuntu-latest
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -28,8 +30,14 @@ jobs:
       CLIENT_ID_AD: ${{ secrets.CLIENT_ID_AD }}
       TF_VERSION: latest
 
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
@@ -45,10 +53,9 @@ jobs:
       - name: Terraform Init
         working-directory: ./terraform  
         run: |
-         terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT_NAME" \
-                        -backend-config="container_name=$container_name" \
-                        -backend-config="resource_group_name=$RESOURCE_GROUP_NAME" \
-                        -backend-config="key=$key"
+
+         terraform init 
+
 
         env:    
           ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
