@@ -43,6 +43,7 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: $TF_VERSION
+          
     
       - name: Log in with Azure
         uses: azure/login@v1
@@ -53,8 +54,8 @@ jobs:
       - name: Terraform Init
         working-directory: ./terraform  
         run: |
-
-         terraform init 
+            
+            terraform init 
 
 
         env:    
@@ -68,16 +69,7 @@ jobs:
       - name: Terraform Plan  
         working-directory: ./terraform  
         run: |
-          export ARM_CLIENT_ID=$ARM_CLIENT_ID
-          export ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET
-          export ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID
-          export ARM_TENANT_ID=$ARM_TENANT_ID
-          export STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME
-          export: CLIENT_ID_AD=$CLIENT_ID_AD
-
-
-          terraform plan  -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }}  -var=CLIENT_ID_AD=${{ secrets.CLIENT_ID_AD }}   -no-color -input=false
-
+          terraform plan -no-color 
         env:
           ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
           ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
