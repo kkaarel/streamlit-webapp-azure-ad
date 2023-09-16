@@ -69,13 +69,14 @@ jobs:
       - name: Terraform Plan  
         working-directory: ./terraform  
         run: | 
-          terraform plan -no-color -var="client_id_ad"=${{ secrets.client_id_ad }}  -var="key"=${{ secrets.key }} -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=CLIENT_ID_AD=${{ secrets.CLIENT_ID_AD }}
+          terraform plan -no-color -var="client_id_ad"=${{ secrets.CLIENT_ID_AD }}  -var="key"=${{ secrets.key }} -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }}
         env:
           ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
           ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
           ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
           ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
           CLIENT_ID_AD: ${{ secrets.CLIENT_ID_AD }}
+          Key: ${{ secrets.key }} 
           
           
       - name: Terraform Apply

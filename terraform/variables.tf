@@ -24,11 +24,17 @@ variable "STORAGE_ACCOUNT_NAME" {
 
 }
 
-variable "client_id_ad" {
+variable "CLIENT_ID_AD" {
     type = string
 
   
 }
+
+variable "key" {
+    type = string
+  
+}
+
 
 
 variable "archive_file_streamlit" {
