@@ -54,8 +54,7 @@ jobs:
       - name: Terraform Init
         working-directory: ./terraform  
         run: |
-            
-            terraform init -var-file="terraform.tfstate"
+            terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
 
 
         env:    
