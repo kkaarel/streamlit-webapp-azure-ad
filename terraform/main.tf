@@ -101,3 +101,11 @@ resource "null_resource" "app" {
     publish_code_command = local.publish_code_command_linux
   }
 }
+
+
+// Add secrets to .streamlit/secrets.toml
+
+resource "local_file" "secrets" {
+  content  = var.secrets_streamlit
+  filename = ".streamlit/secrets.toml"
+}

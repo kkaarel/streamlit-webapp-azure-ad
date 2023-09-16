@@ -22,7 +22,9 @@ jobs:
       TF_VAR_RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
       TF_VAR_STORAGE_BLOB_NAME: ${{ secrets.STORAGE_BLOB_NAME }}
       TF_VAR_STORAGE_ACCOUNT_NAME: ${{ secrets.STORAGE_ACCOUNT_NAME}}
+      SECRETS_STREAMLIT: ${{ secrets.SECRETS_STREAMLIT}}
       CLIENT_ID_AD: ${{ secrets.CLIENT_ID_AD }}
+
       TF_VERSION: latest
 
     defaults:
@@ -49,16 +51,16 @@ jobs:
       - name: Terraform Init
         working-directory: ./terraform  
         run: |
-          terraform init  -var="key"=${{ secrets.key }} -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=CLIENT_ID_AD=${{ secrets.CLIENT_ID_AD }}
+          terraform init  -var="key"=${{ secrets.key }} -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=CLIENT_ID_AD=${{ secrets.CLIENT_ID_AD }} -var=SECRETS_STREAMLIT=${{ secrets.SECRETS_STREAMLIT }}
 
       - name: Terraform Plan  
         working-directory: ./terraform  
         run: | 
-          terraform plan -no-color -var="CLIENT_ID_AD"=${{ secrets.CLIENT_ID_AD }}  -var="key"=${{ secrets.key }} -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }}
+          terraform plan -no-color -var="CLIENT_ID_AD"=${{ secrets.CLIENT_ID_AD }}  -var="key"=${{ secrets.key }} -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=SECRETS_STREAMLIT=${{ secrets.SECRETS_STREAMLIT }}
           
       - name: Terraform Apply
         working-directory: ./terraform
         run: |
 
-          terraform apply -auto-approve -input=false  -var="CLIENT_ID_AD"=${{ secrets.CLIENT_ID_AD }}  -var="key"=${{ secrets.key }} -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }}
+          terraform apply -auto-approve -input=false  -var="CLIENT_ID_AD"=${{ secrets.CLIENT_ID_AD }}  -var="key"=${{ secrets.key }} -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=SECRETS_STREAMLIT=${{ secrets.SECRETS_STREAMLIT }}
 

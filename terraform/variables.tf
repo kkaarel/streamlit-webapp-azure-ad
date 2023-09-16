@@ -1,5 +1,6 @@
 variable "RESOURCE_GROUP_NAME" {
     type = string
+    default = "kkaarel_dev001"
 
 }
 
@@ -10,6 +11,7 @@ variable "project" {
 
 variable "ARM_TENANT_ID" {
     type = string
+ 
 
 }
 
@@ -22,6 +24,7 @@ variable "location" {
 variable "STORAGE_ACCOUNT_NAME" {
     type = string
 
+
 }
 
 variable "CLIENT_ID_AD" {
@@ -32,7 +35,16 @@ variable "CLIENT_ID_AD" {
 
 variable "key" {
     type = string
+
   
+}
+
+
+
+variable "SECRETS_STREAMLIT" {
+  type    = string 
+
+
 }
 
 

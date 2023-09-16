@@ -12,7 +12,9 @@ st.sidebar.success("Select a demo above.")
 
 
 def logout(logout_link):
-    logout_link()
+    # Open the logout link in a new browser window or tab
+    st.write('<script>window.open("{}", "_blank");</script>'.format(logout_link), unsafe_allow_html=True)
+    st.markdown("Logging out...")
 
 
 headers = _get_websocket_headers()
@@ -28,8 +30,10 @@ if "X-Ms-Client-Principal-Name" in headers:
 
 if "Origin" in headers:
     origin = headers["Origin"]
-     
 
+
+#url for logout
+logout_link = f'<a href="{origin}/.auth/logout" target="_blank">Logout</a>' 
 
 st.write("Welcome email:", user_email)
 
@@ -42,11 +46,8 @@ st.title("Streamlit Azure AD Logout Example")
 
 # Create a Streamlit button for logout
 if st.button("Logout"):
-   
-    logout_link = f'<a href="{origin}/.auth/logout" target="_blank">Logout</a>'
-    st.markdown("Logging out...")
     logout(logout_link)
-    #st.markdown(logout_link, unsafe_allow_html=True)
+
 
 
 st.markdown(

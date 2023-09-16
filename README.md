@@ -5,6 +5,16 @@ This script has deployment script for Streamlit to azure with Azure Ad login
 
 ```
 
+## About Streamlit app
+
+
+
+
+
+
+
+
+
 ## About terraform
 
 Terraform state files are stored in blob, so before create storage account and container for you terraform.
@@ -48,6 +58,7 @@ Considering that creating a app registration usually requires administration rig
 
 * I suggest to deploy the app without `CLIENT_ID_AD` and replace it with `---`, so that it is not empty.
 * Then when the app I deployed, go the Azure portal, the app you deployed, under settings/Authentication add identity provider select Microsoft and then create new enterprise application.
+[Authenticate and authorize users end-to-end in Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/tutorial-auth-aad?pivots=platform-linux)
 
 2. Option
 
