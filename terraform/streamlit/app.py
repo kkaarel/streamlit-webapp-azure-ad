@@ -19,7 +19,7 @@ if "X-Ms-Client-Principal-Name" in headers:
 
 
 if "Origin" in headers:
-    origin = headers("Origin")
+    origin = headers["Origin"]
      
 
 
