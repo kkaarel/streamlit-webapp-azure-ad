@@ -9,6 +9,7 @@ data "azurerm_resource_group" "main" {
 }
 
 // This archive_file block creates a ZIP archive from the "./streamlit" directory.
+
 data "archive_file" "app" {
   type        = "zip"
   source_dir  = "./streamlit"
@@ -95,7 +96,7 @@ resource "null_resource" "app" {
   provisioner "local-exec" {
     command = local.publish_code_command_linux
   }
-  depends_on = [local.publish_code_command_linux]
+  depends_on = [local.publish_code_command_linux, local_file.secrets]
   triggers = {
     input_json            = filemd5(var.archive_file_streamlit)
     publish_code_command = local.publish_code_command_linux
@@ -108,4 +109,5 @@ resource "null_resource" "app" {
 resource "local_file" "secrets" {
   content  = var.SECRETS_STREAMLIT
   filename = ".streamlit/secrets.toml"
+
 }
