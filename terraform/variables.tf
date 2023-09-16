@@ -11,7 +11,7 @@ variable "project" {
 
 variable "ARM_TENANT_ID" {
     type = string
- 
+
 
 }
 
@@ -30,24 +30,15 @@ variable "STORAGE_ACCOUNT_NAME" {
 variable "CLIENT_ID_AD" {
     type = string
 
+
   
 }
 
 variable "key" {
     type = string
-
+ 
   
 }
-
-
-
-variable "SECRETS_STREAMLIT" {
-  type    = string 
-
-
-}
-
-
 
 variable "archive_file_streamlit" {
   type = string

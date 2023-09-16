@@ -14,7 +14,7 @@ data "archive_file" "app" {
   type        = "zip"
   source_dir  = "./streamlit"
   output_path = var.archive_file_streamlit
-  depends_on = [ local_file.secrets ]
+
 }
 
 // This resource block creates an Azure Storage Account for Terraform state files.
@@ -104,11 +104,3 @@ resource "null_resource" "app" {
   }
 }
 
-
-// Add secrets to .streamlit/secrets.toml
-
-resource "local_file" "secrets" {
-  content  = var.SECRETS_STREAMLIT
-  filename = ".streamlit/secrets.toml"
-
-}
