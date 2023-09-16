@@ -47,6 +47,7 @@ jobs:
     # This is a snowflake secrets example
       - name: Generate secrets.toml file
         run: |
+          ls -la
           echo "[connections.snowpark]                               
           account = $(echo -e \"${{ secrets.SNOWFLAKE_ACCOUNT }}\")
           user = $(echo -e \"${{ secrets.SNOWFLAKE_USER }}\")
