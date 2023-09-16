@@ -23,7 +23,7 @@ data "archive_file" "app" {
 
 
 resource "azurerm_storage_account" "tfstate" {
-  name                     = "kkkaarel"
+  name                     = var.STORAGE_ACCOUNT_NAME
   resource_group_name      = data.azurerm_resource_group.main.name
   location                 = var.location
   account_tier             = "Standard"
