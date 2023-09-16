@@ -40,7 +40,6 @@ jobs:
         with:
           terraform_version: $TF_VERSION
           
-    
       - name: Log in with Azure
         uses: azure/login@v1
         with:
