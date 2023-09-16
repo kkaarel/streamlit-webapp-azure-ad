@@ -16,7 +16,7 @@ headers = _get_websocket_headers()
 
 if "X-Ms-Client-Principal-Name" in headers:
     user_email = headers["X-Ms-Client-Principal-Name"]
-    origin = headers("Origin")
+
 
 if "Origin" in headers:
     origin = headers("Origin")
