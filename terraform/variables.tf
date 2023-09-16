@@ -1,6 +1,6 @@
 variable "RESOURCE_GROUP_NAME" {
     type = string
-    default = ""
+
 }
 
 variable "project" {
@@ -10,7 +10,7 @@ variable "project" {
 
 variable "ARM_TENANT_ID" {
     type = string
-    default = ""
+
 }
 
 variable "location" {
@@ -21,12 +21,12 @@ variable "location" {
 
 variable "STORAGE_ACCOUNT_NAME" {
     type = string
-    default = ""
+
 }
 
 variable "client_id_ad" {
     type = string
-    default = ""
+
   
 }
 
