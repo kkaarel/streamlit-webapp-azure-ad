@@ -49,8 +49,8 @@ jobs:
       - name: Terraform Init
         working-directory: ./terraform  
         run: |
-           
-            terraform init  -var="key"=${{ secrets.key }} -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=CLIENT_ID_AD=${{ secrets.CLIENT_ID_AD }}
+          terraform init  -var="key"=${{ secrets.key }} -var=ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }} -var=RESOURCE_GROUP_NAME=${{ secrets.RESOURCE_GROUP_NAME }} -var=STORAGE_ACCOUNT_NAME=${{ secrets.STORAGE_ACCOUNT_NAME }} -var=CLIENT_ID_AD=${{ secrets.CLIENT_ID_AD }}
+          
       - name: Terraform Plan  
         working-directory: ./terraform  
         run: | 
