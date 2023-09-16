@@ -55,7 +55,7 @@ jobs:
         working-directory: ./terraform  
         run: |
             
-            terraform init 
+            terraform init -var-file="terraform.tfstate"
 
 
         env:    
