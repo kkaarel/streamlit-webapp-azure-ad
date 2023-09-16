@@ -47,7 +47,6 @@ jobs:
     # This is a snowflake secrets example
       - name: Generate secrets.toml file
         run: |
-          ls -la
           echo "[connections.snowpark]                               
           account = $(echo -e \"${{ secrets.SNOWFLAKE_ACCOUNT }}\")
           user = $(echo -e \"${{ secrets.SNOWFLAKE_USER }}\")
@@ -56,7 +55,7 @@ jobs:
           warehouse = $(echo -e \"${{ secrets.SNOWFLAKE_WAREHOUSE_DEV }}\")
           database = $(echo -e \"${{ secrets.SNOWFLAKE_DATABASE_DEV }}\")
           schema = $(echo -e \"${{ secrets.SNOWFLAKE_SCHEMA_DEV }}\")
-          client_session_keep_alive = true" >> terraform/streamlit/.streamlit/secrets.toml
+          client_session_keep_alive = true" >> streamlit/.streamlit/secrets.toml
 
       - name: Terraform Init
         working-directory: ./terraform  
