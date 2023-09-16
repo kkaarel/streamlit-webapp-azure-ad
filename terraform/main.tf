@@ -72,7 +72,7 @@ resource "azurerm_linux_web_app" "app" {
 
     active_directory_v2 {
       // The application is pre created from Azure, this is for security puropses so that the deployment script would only have rights to create resources.
-      client_id                   = var.client_id_ad
+      client_id                   = var.CLIENT_ID_AD
       client_secret_setting_name  = "MICROSOFT_PROVIDER_AUTHENTICATION_SECRET"
       tenant_auth_endpoint        = "https://sts.windows.net/${var.ARM_TENANT_ID}/v2.0"
       www_authentication_disabled = false
