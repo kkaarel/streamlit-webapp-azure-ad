@@ -54,7 +54,7 @@ jobs:
       - name: Terraform Init
         working-directory: ./terraform  
         run: |
-            terraform init  -backend-config="key=${{ secrets.key }} -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
+            terraform init  -backend-config="key"=${{ secrets.key }} -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
 
 
         env:    
