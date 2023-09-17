@@ -17,9 +17,9 @@ This script has deployment script for Streamlit to azure with Azure Ad login
 
 ## About terraform
 
-Terraform state files are stored in blob, so before create storage account and container for you terraform.
+Terraform state files are stored in blob, create storage account and container for you terraform.
 
-This terraform is used to deploy Streamlit app to azure webapp. There are two resource needed for that:
+This terraform is used to deploy Streamlit app to azure webapp and create infra for the app. There are two resource needed for that:
 
 #### Azure Service Plan:
 
@@ -37,6 +37,8 @@ For running the app, there is the Streamlit run command for running the app.
 
 For example the app is in a app/ folder then the run command should also have .app/ folder 
 
+In this configuration the app.py is in the root.
+
 
 ```
 
@@ -50,7 +52,7 @@ For example the app is in a app/ folder then the run command should also have .a
 
 ```
 
-### App registration for you sign in client id
+### App registration for sign in: 
 
 Considering that creating a app registration usually requires administration rights, especially when creating a sign in app, app is create manually from the azure portal. 
 
@@ -134,16 +136,24 @@ You can add the zip into .gitignore like this
 The workflow is triggered when a push event occurs on the dev branch and when changes are made to files in the .github/workflows/terraform.yml path or the terraform/ directory.
 #### Jobs
 The workflow defines a single job named terraform.
+
 Environment Variables and Secrets
+
 The job sets several environment variables to securely store sensitive information like Azure credentials and Terraform variables. These values are populated using GitHub Secrets.
+
 Defaults
+
 The job sets some defaults for its runs, specifying the shell as bash and setting the working directory to ./terraform.
+
 Workflow Steps
+
 Checkout: This step checks out the code from the repository using the actions/checkout@v2 action.
 
 `Setup Terraform:` It sets up Terraform by installing the specified Terraform version using the hashicorp/setup-terraform@v2 action.
 
 `Log in with Azure:` This step logs in to Azure using the Azure CLI and the provided Azure credentials stored in the secrets.AZURE_CREDENTIALS secret.
+
+`Generate secrets.toml file:` Examle how to create secrets into the .streamlit/secrets.toml, this is a snowflake example. The secret is stored in Github secrets.
 
 `Terraform Init:` Initializes the Terraform configuration in the ./terraform directory. It passes several Terraform variables and secrets as -var flags, including key, ARM_TENANT_ID, RESOURCE_GROUP_NAME, STORAGE_ACCOUNT_NAME, and CLIENT_ID_AD.
 
@@ -174,6 +184,8 @@ This workflow relies on the following environment variables and GitHub Secrets, 
 `secrets.key:` Storage account key.
 
 `secrets.AZURE_CREDENTIALS:` Azure credentials, json format for logging in to Azure.
+
+This is for creating the AZURE_CREDENTIALS json file that will be stored in github secrets
 
 ```
 az ad sp create-for-rbac --name <nameOftheServiceprincipal> \
