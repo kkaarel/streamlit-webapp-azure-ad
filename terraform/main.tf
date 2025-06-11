@@ -1,5 +1,5 @@
 // This data block retrieves Azure client configuration.
-data "azurerm_client_config" "current" {
+data "azuread_client_config" "current" {
 
 }
 
@@ -17,6 +17,43 @@ data "archive_file" "app" {
 
 }
 
+resource "azuread_application" "streamlit" {
+  display_name = "streamlit-testing-public"
+  owners       = [data.azuread_client_config.current.object_id]
+
+  // add api permissions to read the user, otherwise you will need to grant them yourself in the first login
+
+  lifecycle {
+    ignore_changes = [web] // this is for ignoring the redirect values
+  }
+
+}
+
+resource "azuread_service_principal" "streamlit" {
+  client_id                    = azuread_application.streamlit.client_id
+  app_role_assignment_required = false
+  owners                       = [data.azuread_client_config.current.object_id]
+}
+
+resource "time_rotating" "example" {
+  rotation_days = 180
+}
+
+resource "azuread_service_principal_password" "streamlit" {
+  service_principal_id = azuread_service_principal.streamlit.id
+  rotate_when_changed = {
+    rotation = time_rotating.example.id
+  }
+}
+
+resource "azuread_application_password" "streamlit" {
+
+  application_id = azuread_application.streamlit.id
+
+}
+
+
+
 // This resource block creates an Azure Storage Account for Terraform state files.
 resource "azurerm_storage_account" "tfstate" {
   name                     = var.STORAGE_ACCOUNT_NAME
@@ -32,7 +69,7 @@ resource "azurerm_service_plan" "streamlit" {
   location            = "West Europe"
   resource_group_name = data.azurerm_resource_group.main.name
   os_type             = "Linux"
-  sku_name            = "B1"
+  sku_name            = "B3"
 
   lifecycle {
     create_before_destroy = true
@@ -44,7 +81,7 @@ resource "azurerm_service_plan" "streamlit" {
 
 // This resource block creates an Azure Linux Web App.
 resource "azurerm_linux_web_app" "app" {
-  name                = "WEBAPP-${var.project}"
+  name                = "WEBAPP-23e23ed23d2${var.project}"
   location            = var.location
   service_plan_id     = azurerm_service_plan.streamlit.id
   resource_group_name = data.azurerm_resource_group.main.name
@@ -62,8 +99,8 @@ resource "azurerm_linux_web_app" "app" {
 
     active_directory_v2 {
       // The application is pre-created in Azure; this setting enhances security.
-      client_id                   = var.CLIENT_ID_AD
-      client_secret_setting_name  = "MICROSOFT_PROVIDER_AUTHENTICATION_SECRET"
+      client_id                   = azuread_application.streamlit.client_id
+      client_secret_setting_name  = "ad"
       tenant_auth_endpoint        = "https://sts.windows.net/${var.ARM_TENANT_ID}/v2.0"
       www_authentication_disabled = false
     }
@@ -82,14 +119,27 @@ resource "azurerm_linux_web_app" "app" {
   }
 
   app_settings = {
-    "SCM_DO_BUILD_DURING_DEPLOYMENT" = 1
+
+    "ad" = azuread_application_password.streamlit.value
+    "SCM_DO_BUILD_DURING_DEPLOYMENT" = true
+    "WEBSITE_RUN_FROM_PACKAGE" = true
+    "ENABLE_ORYX_BUILD" = true
     // Add other app settings as needed
   }
 }
 
+resource "azuread_application_redirect_uris" "app_redirect_uris" {
+  depends_on     = [azuread_application.streamlit, azurerm_linux_web_app.app]
+  application_id = azuread_application.streamlit.id
+  type           = "Web"
+  redirect_uris  = ["https://${azurerm_linux_web_app.app.name}.azurewebsites.net/.auth/login/aad/callback"]
+
+
+}
+
 // This local block defines a command for publishing code to the Azure Web App (Linux).
 locals {
-  publish_code_command_linux = "az webapp deployment source config-zip --resource-group ${azurerm_linux_web_app.app.resource_group_name} --name ${azurerm_linux_web_app.app.name} --src ${var.archive_file_streamlit}"
+  publish_code_command_linux = "az webapp deploy --resource-group ${azurerm_linux_web_app.app.resource_group_name} --name ${azurerm_linux_web_app.app.name} --src-path ${var.archive_file_streamlit} --type zip"
 }
 
 // This null_resource block publishes code to the Azure Web App (Linux) using the local-exec provisioner.
